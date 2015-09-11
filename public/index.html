@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html ng-app="jobsList">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Node/Angular</title>
+
+	
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		#job-list 				{ margin-bottom:50px; }
+		#job-form 	 			{ margin-bottom:50px; }
+	</style>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+
+	<script src="js/controllers/jobs_controller.js"></script> 
+	<script src="js/services/job_services.js"></script> 
+	<script src="js/inclusions.js"></script> 
+
+</head>
+
+<body ng-controller="mainController">
+	<div class="container">
+
+		<div class="jumbotron text-center">
+			<h1>My Jobs <span class="label label-info">{{ jobs.length }}</span></h1>
+		</div>
+
+		<!-- Display All Jobs -->
+		<div id="job-list" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+
+				<!-- Iterate over jobs from $scope.jobs -->
+				<div class="checkbox" ng-repeat="job in Jobs">
+					<label>
+						<input type="checkbox" ng-click="deleteJob(job._id)"> {{ job.text }}
+					</label>
+				</div>
+
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		</div>
+
+		<!-- Create Jobs -->
+		<div id="job-form" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="My next Job" ng-model="formData.text">
+					</div>
+
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createJob()">Add</button>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name"         : "angular-node-mongoDB",
+  "version"      : "0.0.1",
+  "description"  : "Basic structure",
+  "main"         : "server.js",
+  "dependencies" : {
+    "express"         : "~4.6.1",
+    "mongoose"        : "~3.8.13",
+    "body-parser"     : "~1.4.3",
+    "method-override" : "~2.1.1"
+  }
+}
