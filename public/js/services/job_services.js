@@ -1,13 +1,13 @@
 angular.module('jobsService', [])
-	.factory('Jobs', ['$http',function($http) {
+	.factory('Jobs', ['$http', $http => {
 		return {
-			get : function() {
+			get : () => {
 				return $http.get('/api/jobs');
 			},
-			create : function(todoData) {
+			create : todoData => {
 				return $http.post('/api/jobs', todoData);
 			},
-			delete : function(id) {
+			delete : id => {
 				return $http.delete('/api/jobs/' + id);
 			}
 		}
