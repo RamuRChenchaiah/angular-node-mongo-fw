@@ -1,43 +1,43 @@
 angular.module('jobsController', [])
-	.controller('mainController', ['$scope','$http','Jobs', function($scope, $http, Jobs) {
-		$scope.formData = {};
-		$scope.loading = true;
+    .controller('mainController', ['$scope', '$http', 'Jobs', ($scope, $http, Jobs) => {
+        $scope.formData = {};
+        $scope.loading = true;
 
-		/*
-		* Display all Jobs when page loads
-		*/
-		Jobs.get()
-			.success(function(data) {
-				$scope.Jobs = data;
-				$scope.loading = false;
-			});
+        /*
+         * Display all Jobs when page loads
+         */
+        Jobs.get()
+            .then(res => {
+                $scope.Jobs = res.data;
+                $scope.loading = false;
+            }, err => console.log(err));
 
-		/*
-		* Add a Job
-		*/
-		$scope.createJob = function() {
-			if ($scope.formData.text != undefined) {
-				$scope.loading = true;
+        /*
+         * Add a Job
+         */
+        $scope.createJob = () => {
+            if ($scope.formData.text != undefined) {
+                $scope.loading = true;
 
-				Jobs.create($scope.formData)
-					.success(function(data) {
-						$scope.loading = false;
-						$scope.formData = {}; 
-						$scope.Jobs = data; 
-					});
-			}
-		};
+                Jobs.create($scope.formData)
+                    .then(res => {
+                        $scope.loading = false;
+                        $scope.formData = {};
+                        $scope.Jobs = res.data;
+                    }, err => console.log(err));
+            }
+        };
 
-		/*
-		* Delete a Job
-		*/
-		$scope.deleteJob = function(id) {
-			$scope.loading = true;
+        /*
+         * Delete a Job
+         */
+        $scope.deleteJob = id => {
+            $scope.loading = true;
 
-			Jobs.delete(id)
-				.success(function(data) {
-					$scope.loading = false;
-					$scope.Jobs = data;
-				});
-		};
-	}]);
+            Jobs.delete(id)
+                .then(res => {
+                    $scope.loading = false;
+                    $scope.Jobs = res.data;
+                }, err => console.log(err));
+        };
+    }]);
